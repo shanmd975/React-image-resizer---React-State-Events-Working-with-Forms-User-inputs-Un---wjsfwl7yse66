@@ -1,42 +1,23 @@
-import React, { useState } from "react";
-import "../styles/App.css";
-import imgSrc from "./image.jpeg";
-// import imgSrc from "../image.jpeg";
+import React, { useState } from 'react'
+import '../styles/App.css';
 
 const App = () => {
-  const [height, setHeight] = useState(320);
-  const [width, setWidth] = useState(320);
-
+  const[size, setSize] = useState({
+    height:320,
+    width:320
+  });
+  // const[weight, setWeight] = useState(320);
+  const handleChange = (e)=>{
+    setSize({...size, [e.target.name]:e.target.value});
+  }
   return (
     <div id="main">
-      <form>
-        <label htmlFor="height-slider">Height Slider</label>
-        <input
-          type="range"
-          min="100"
-          max="800"
-          value={height}
-          onChange={(e) => setHeight(e.target.value)}
-          id="height-slider"
-        />
-        <br />
-        <label htmlFor="width-slider">Width Slider</label>
-        <input
-          type="range"
-          min="100"
-          max="800"
-          value={width}
-          onChange={(e) => setWidth(e.target.value)}
-          id="width-slider"
-        />
-      </form>
-      <img
-        src={imgSrc}
-        style={{ height: `${height}px`, width: `${width}px` }}
-        id="resizable-img"
-      />
+      <input type="range" name={"height"} min={100} max={800} value={size.height} id={"height-slider"} onChange={handleChange}/>
+      <input type="range" name='width' min={100} max={800} value={size.width} id={"width-slider"} onChange={handleChange}/><br/>
+      <img src="src\image.jpeg" alt="image" id='resizable-img' height={size.height+"px"} width={size.width+"px"}/>
     </div>
-  );
-};
+  )
+}
+
 
 export default App;
